@@ -15,7 +15,7 @@
 
 # インフラ構成図
 
-[](./img/infrastructure.drawio.png)
+![](./img/infrastructure.drawio.png)
 
 # シーケンス図
 
