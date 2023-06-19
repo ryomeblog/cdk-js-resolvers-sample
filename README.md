@@ -1,5 +1,6 @@
 # CDK JavaScript Resolver Sample
 このリポジトリは、CDKでJSリゾルバーを作成するサンプルコードです。
+
 サンプルコードとしてCognito認証付きのToDoリストアプリを作成しました。
 
 ## 環境
