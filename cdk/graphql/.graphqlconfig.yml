@@ -1,0 +1,28 @@
+projects:
+  sampleapi:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ../../web/src/graphql/API.js
+        docsFilePath: ../../web/src/graphql
+        region: ap-northeast-1
+        apiId: null
+        maxDepth: 4
+        backend: AWS AppSync
+        output: ../../web/src/graphql
+        projectName: web
+        projectPath: ../../web/
+        apiUrl: >-
+          https://2h7r4rz2l5at3mlvrcsbnsznky.appsync-api.ap-northeast-1.amazonaws.com/graphql
+        API:
+          key: null
+          isClient: false
+          isServerless: false
+extensions:
+  amplify:
+    version: 3
