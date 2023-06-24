@@ -39,10 +39,10 @@ export class SampleCdkStack extends cdk.Stack {
 
     // バケットにウェブサイトのファイルをデプロイします。
     // '../web/build'の位置にあるファイルがデプロイの対象となります。
-    new s3deploy.BucketDeployment(this, 'DeployWebsite', {
-      sources: [s3deploy.Source.asset('../web/build')],
-      destinationBucket: bucket,
-    });
+    // new s3deploy.BucketDeployment(this, 'DeployWebsite', {
+    //   sources: [s3deploy.Source.asset('../web/build')],
+    //   destinationBucket: bucket,
+    // });
 
     // CloudFrontのDistributionを作成します。
     // このDistributionは先ほど作成したS3バケットをOrigin（配信元）として設定されます。
