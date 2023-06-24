@@ -1,6 +1,6 @@
 ﻿const awsconfig = {
     Auth: {
-        region: 'ap-northeast-1',
+        region: '【リージョン】',
         userPoolId: '【UserPoolId】',
         userPoolWebClientId: '【UserPoolWebClientId】',
         oauth: {
@@ -12,7 +12,7 @@
         }
     },
     aws_appsync_graphqlEndpoint: '【GraphQLEndpoint】',
-    aws_appsync_region: 'ap-northeast-1',
+    aws_appsync_region: '【リージョン】',
     aws_appsync_authenticationType: "AMAZON_COGNITO_USER_POOLS",
     aws_appsync_apiKey: "null"
 };

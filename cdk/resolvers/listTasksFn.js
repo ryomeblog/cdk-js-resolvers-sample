@@ -1,7 +1,11 @@
 import {util} from '@aws-appsync/utils';
 export function request(ctx) {
-    return {};
+  console.log('-----listTasksFn start-----');
+  return {
+    operation: 'Scan',
+  };
 }
 export function response(ctx) {
-    return ctx.prev.result;
+  console.log('-----listTasksFn end-----');
+    return ctx.result.items;
 }

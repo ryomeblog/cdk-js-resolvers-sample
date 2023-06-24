@@ -46,7 +46,7 @@ sequenceDiagram
     Note over User,DynamoDB : 【タスク作成】
     User->>React: 新規タスクのタイトルと説明を入力
     React-->>User: 新規タスクのタイトルと説明を描画
-    User->>React: "New Task"ボタンをクリック
+    User->>React: "Add Task"ボタンをクリック
     React->>AppSync: タスク作成を要求
     AppSync->>DynamoDB: 新規タスクを作成
     DynamoDB-->>AppSync: 作成したタスクを返す
@@ -58,7 +58,7 @@ sequenceDiagram
     React-->>User: タスクを描画
 
     Note over User,DynamoDB : 【タスク完了】
-    User->>React: "Not completed"ボタンをクリック
+    User->>React: チェックボックスをクリック
     React->>AppSync: タスク更新を要求
     AppSync->>DynamoDB: 既存のタスクを更新
     DynamoDB-->>AppSync: 更新したタスクを返す
@@ -70,7 +70,7 @@ sequenceDiagram
     React-->>User: タスクを描画
 
     Note over User,DynamoDB : 【タスク削除】
-    User->>React: "Delete"ボタンをクリック
+    User->>React: 削除アイコンをクリック
     React->>AppSync: タスク削除を要求
     AppSync->>DynamoDB: 既存のタスクを削除
     DynamoDB-->>AppSync: 削除したタスクを返す

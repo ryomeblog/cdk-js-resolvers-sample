@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { listTasks } from './graphql/queries';
 import { createTask, updateTask, deleteTask } from './graphql/mutations';
+import { Button, TextField, List, ListItem, Typography, Checkbox, Container, ListItemText, IconButton, Box } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -11,7 +14,6 @@ function App() {
 
   const fetchTasks = async () => {
     const apiData = await API.graphql(graphqlOperation(listTasks));
-    console.log(apiData);
     setTasks(apiData.data.listTasks);
   }
 
@@ -21,7 +23,8 @@ function App() {
         input: { title: newTaskTitle, description: newDescription }
       }));
     await fetchTasks();
-    setNewTaskTitle("");
+    setNewTaskTitle('');
+    setNewDescription('');
   }
 
   const updateCompleted = async (toDoID) => {
@@ -52,37 +55,38 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Container>
       {isAuthenticated ? (
-        <div>
-          <p>ユーザーはログインしています。</p>
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h4">ユーザーはログインしています。</Typography>
           {/* サインアウトボタン */}
-          <button onClick={() => Auth.signOut().then(() => setIsAuthenticated(false))}>サインアウト</button>
-          <br /><br />
-          <input value={newTaskTitle} onChange={(e) => setNewTaskTitle(e.target.value)} placeholder="New Task" />
-          <br />
-          <textarea value={newDescription} onChange={(e) => setNewDescription(e.target.value)} rows="5" cols="33"></textarea>
-          <br />
-          <button onClick={addTask}>Add Task</button>
-          <ul>
+          <Button variant="contained" color="primary" onClick={() => Auth.signOut().then(() => setIsAuthenticated(false))}>サインアウト</Button>
+          <Box sx={{ mt: 4 }}>
+            <TextField value={newTaskTitle} onChange={(e) => setNewTaskTitle(e.target.value)} label="New Task" fullWidth/>
+            <TextField value={newDescription} onChange={(e) => setNewDescription(e.target.value)} label="Description" rows={5} multiline fullWidth/>
+            <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={addTask}>Add Task</Button>
+          </Box>
+          <List>
             {tasks.map((task) => (
-              <li key={task.ToDoID}>
-                <h2>{task.title}</h2>
-                <p>{task.description}</p>
-                <p>{task.completed ? 'Completed' : (<><button onClick={() => updateCompleted(task.ToDoID)}>Not completed</button></>)}</p>
-                <p><button onClick={() => deleteToDoTask(task.ToDoID)}>Delete</button></p>
-              </li>
+              <ListItem key={task.ToDoID} secondaryAction={
+                <IconButton edge="end" onClick={() => deleteToDoTask(task.ToDoID)}>
+                  <DeleteIcon />
+                </IconButton>
+              }>
+                <Checkbox checked={task.completed} onClick={() => updateCompleted(task.ToDoID)} />
+                <ListItemText primary={task.title} secondary={task.description} />
+              </ListItem>
             ))}
-          </ul>
-        </div>
+          </List>
+        </Box>
       ) : (
-        <>
-          <p>ユーザーはログインしていません。</p>
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h4">ユーザーはログインしていません。</Typography>
           {/* ログインボタン */}
-          <button onClick={() => Auth.federatedSignIn().then(() => setIsAuthenticated(true))}>ログイン/サインアップ</button>
-        </>
+          <Button variant="contained" color="primary" onClick={() => Auth.federatedSignIn()}>ログイン/サインアップ</Button>
+        </Box>
       )}
-    </>
+    </Container>
   );
 }
 
