@@ -1,4 +1,4 @@
-import {util} from '@aws-appsync/utils';
+import { util } from '@aws-appsync/utils';
 export function request(ctx) {
   console.log('-----listTasksFn start-----');
   return {
@@ -7,5 +7,5 @@ export function request(ctx) {
 }
 export function response(ctx) {
   console.log('-----listTasksFn end-----');
-    return ctx.result.items;
+  return ctx.result.items;
 }
